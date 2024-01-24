@@ -17,7 +17,7 @@ YATLA is a simple yet stylish todo-list app built using HTML, Tailwind CSS, and 
 
 ## Preview
 
-![YATLA Preview](./yatla-preview.png)
+![YATLA Preview](./yatla-preview.PNG)
 
 ## Contributing
 

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>YATLA - Yet Another Todo-List App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="main.js" defer></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  </head>
+  <body class="bg-gradient-to-bl from-sky-700 to-sky-500 text-white">
+    <main class="p-10 min-h-screen w-full relative">
+      <h1 class="text-2xl font-semibold">My tasklist</h1>
+      <h2 id="date" class="font-light"></h2>
+      <ul id="taskList" class="py-5">
+        <!-- Task list items go here -->
+      </ul>
+      <form
+        id="addTask"
+        class="bg-slate-200 flex rounded-lg fixed bottom-0 left-0 right-0 p-2 m-5 shadow-lg">
+        <button
+          type="submit"
+          class="text-4xl text-black/70 hover:text-sky-500 mt-1">
+          <ion-icon name="add-outline"></ion-icon>
+        </button>
+        <input
+          type="text"
+          placeholder="Add a task here :3"
+          autofocus="true"
+          class="p-1 bg-transparent text-black/90 w-full focus:outline-none" />
+      </form>
+    </main>
+  </body>
+</html>
+
+<!-- Design inspired by Microsoft To-Do. Learning project, no copyright intended -->

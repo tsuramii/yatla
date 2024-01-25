@@ -22,10 +22,7 @@ const months = [
   "December",
 ];
 
-const dateElement = document.querySelector("#date");
-const addTaskElement = document.querySelector("#addTask");
-const taskListElement = document.querySelector("#taskList");
-
+const getElement = (id) => document.querySelector(`#${id}`);
 const currentDate = new Date();
 const [month, dayName, day] = [
   months[currentDate.getMonth()],
@@ -33,29 +30,32 @@ const [month, dayName, day] = [
   currentDate.getUTCDate(),
 ];
 
-dateElement.innerHTML = `${dayName}, ${month} ${day}`;
+getElement("date").innerHTML = `${dayName}, ${month} ${day}`;
 
-addTaskElement.addEventListener("submit", (event) => {
+getElement("addTask").addEventListener("submit", (event) => {
   event.preventDefault();
-  const value = addTaskElement.querySelector("input").value;
+  const value = getElement("addTask").querySelector("input").value;
   value && addTask(value);
 });
 
 const tasks = { ...localStorage };
 let taskCount = localStorage.length;
 
-for (const [taskId, taskValue] of Object.entries(tasks)) {
-  taskListElement.innerHTML += `<li id="${taskId}" class="w-full shadow-lg my-1 bg-slate-200 hover:bg-slate-100 transition-colors text-black/90 p-3 rounded-md"><button class="-mb-2" onclick="deleteTask(${taskId})"><ion-icon name="ellipse-outline"></ion-icon></button> ${taskValue}</li>`;
-}
+const taskListItem = (taskId, taskValue) =>
+  `<li id="${taskId}" class="w-full shadow-lg my-1 bg-slate-200 hover:bg-slate-100 transition-colors text-black/90 p-3 rounded-md"><button class="-mb-2" onclick="deleteTask(${taskId})"><ion-icon name="ellipse-outline"></ion-icon></button> ${taskValue}</li>`;
+
+Object.entries(tasks).forEach(
+  ([taskId, taskValue]) =>
+    (taskListElement.innerHTML += taskListItem(taskId, taskValue))
+);
 
 function addTask(task) {
-  taskListElement.innerHTML += `<li id="${taskCount}" class="w-full shadow-lg my-1 bg-slate-200 hover:bg-slate-100 transition-colors text-black/90 p-3 rounded-md"><button class="-mb-2" onclick="deleteTask(${taskCount})"><ion-icon name="ellipse-outline"></ion-icon></button> ${task}</li>`;
-  localStorage.setItem(taskCount, task);
-  taskCount++;
+  taskListElement.innerHTML += taskListItem(taskCount, task);
+  localStorage.setItem(taskCount++, task);
 }
 
 function deleteTask(taskId) {
-  const taskItem = document.getElementById(taskId);
+  const taskItem = getElement(taskId);
   localStorage.removeItem(taskId);
   taskItem.remove();
 }

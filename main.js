@@ -22,7 +22,11 @@ const months = [
   "December",
 ];
 
-const getElement = (id) => document.querySelector(`#${id}`);
+const getElement = (id) =>
+  typeof id === "number"
+    ? document.getElementById(id)
+    : document.querySelector(`#${id}`);
+
 const currentDate = new Date();
 const [month, dayName, day] = [
   months[currentDate.getMonth()],
@@ -46,11 +50,11 @@ const taskListItem = (taskId, taskValue) =>
 
 Object.entries(tasks).forEach(
   ([taskId, taskValue]) =>
-    (taskListElement.innerHTML += taskListItem(taskId, taskValue))
+    (getElement("taskList").innerHTML += taskListItem(taskId, taskValue))
 );
 
 function addTask(task) {
-  taskListElement.innerHTML += taskListItem(taskCount, task);
+  getElement("taskList").innerHTML += taskListItem(taskCount, task);
   localStorage.setItem(taskCount++, task);
 }
 
